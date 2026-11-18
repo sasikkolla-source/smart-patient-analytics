@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Smart Patient Analytics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+<h1>Smart Patient Analytics</h1>
+<p class="sub">Record patient vitals, get an automatic risk score, and see which patients need attention first.</p>
+
+<section class="stats" id="stats"></section>
+
+<section class="grid">
+  <div class="panel">
+    <h2>Add patient</h2>
+    <form id="form">
+      <label>Name<input name="name" required></label>
+      <label>Age<input name="age" type="number" min="0" max="120" required></label>
+      <label>Systolic BP (mmHg)<input name="sys" type="number" min="50" max="260" required></label>
+      <label>Heart rate (bpm)<input name="hr" type="number" min="20" max="220" required></label>
+      <label>Temperature (°C)<input name="temp" type="number" step="0.1" min="30" max="45" required></label>
+      <label>SpO₂ (%)<input name="spo2" type="number" min="50" max="100" required></label>
+      <label class="full">Blood glucose (mg/dL)<input name="glu" type="number" min="20" max="600" required></label>
+      <button class="full" type="submit">Add patient</button>
+    </form>
+  </div>
+  <div class="panel">
+    <h2>Patients by risk level</h2>
+    <div id="riskBars"></div>
+    <h2 style="margin-top:20px">Patients by age group</h2>
+    <div id="ageBars"></div>
+  </div>
+</section>
+
+<section class="panel">
+  <h2>Patient records</h2>
+  <div class="tools">
+    <input id="q" type="search" placeholder="Search by name" aria-label="Search by name">
+    <select id="f" aria-label="Filter by risk"><option value="">All risk levels</option><option>High</option><option>Medium</option><option>Low</option></select>
+  </div>
+  <div class="wrap"><table>
+    <thead><tr><th data-k="name">Name</th><th data-k="age">Age</th><th data-k="sys">BP</th><th data-k="hr">HR</th><th data-k="temp">Temp</th><th data-k="spo2">SpO₂</th><th data-k="glu">Glucose</th><th data-k="score">Risk</th><th></th></tr></thead>
+    <tbody id="rows"></tbody>
+  </table></div>
+  <div id="empty" class="empty" hidden>No patients match. Add a patient or clear the filters.</div>
+  <p class="note">Risk score is a simple rule-based demo (age, blood pressure, heart rate, temperature, oxygen, glucose). It is not a medical diagnosis. Click a column heading to sort.</p>
+</section>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
